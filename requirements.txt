@@ -1,0 +1,12 @@
+# Backend Python dependencies
+# Install with: pip install -r requirements.txt
+
+fastapi
+uvicorn[standard]
+sqlalchemy
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1
+pydantic[email]
+python-multipart
+aiofiles
