@@ -1,0 +1,84 @@
+Here's the complete setup guide for running CCRTS on a new machine:
+
+Prerequisites
+Install these first:
+
+Python 3.9+ → python.org/downloads
+Node.js 18+ → nodejs.org
+Git → git-scm.com
+Step 1 — Copy / Clone the project
+
+# If copying files manually, just place the folder anywhere, e.g.:
+cd ~/Desktop
+# folder name: AFDE_May26_KajanaUday_CCRTS
+
+# OR if pushing to GitHub first:
+git clone <your-github-repo-url>
+cd AFDE_May26_KajanaUday_CCRTS
+Step 2 — Backend Setup
+
+# Navigate to project root
+cd AFDE_May26_KajanaUday_CCRTS
+
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate it
+source venv/bin/activate          # macOS / Linux
+venv\Scripts\activate             # Windows
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Start the backend
+cd backend
+uvicorn main:app --reload --port 8000
+The backend will:
+
+Auto-create the SQLite database at backend/database/ccrts.db
+Seed default roles, admin user, and 8 complaint categories
+Be available at http://localhost:8000
+Show Swagger docs at http://localhost:8000/docs
+Step 3 — Frontend Setup
+Open a second terminal:
+
+
+cd AFDE_May26_KajanaUday_CCRTS/frontend
+
+# Install Node dependencies
+npm install
+
+# Start the frontend
+npm run dev
+Frontend runs at http://localhost:3000
+
+Step 4 — Open the App
+Open your browser and go to:
+
+
+http://localhost:3000
+Login with any of these seeded accounts:
+
+Role	Email	Password
+Admin	admin@ccrts.com	admin123
+Support Agent	alice@ccrts.com	admin123
+Supervisor	carol@ccrts.com	admin123
+Customer	david@example.com	admin123
+Quality Team	eve@ccrts.com	admin123
+Quick Reference — What runs where
+Service	Command	URL
+Backend	uvicorn main:app --reload --port 8000 (inside backend/)	http://localhost:8000
+Frontend	npm run dev (inside frontend/)	http://localhost:3000
+API Docs	—	http://localhost:8000/docs
+Troubleshooting
+pip not found → use pip3 instead
+
+python not found → use python3 instead
+
+Port already in use → change port: uvicorn main:app --port 8001
+
+npm install fails → delete frontend/node_modules/ and retry
+
+Database issues → delete backend/database/ccrts.db and restart backend (it recreates automatically)
+
+CORS errors in browser → make sure backend is running on port 8000 (frontend is hardcoded to call 8000)
